@@ -85,7 +85,7 @@ REVISION=1 ./scripts/publish.sh     # 上传到 GitHub Releases，tag 为 v<版�
 
 `release-local.sh` 只需要 Xcode，不需要开发者账号，也不需要 `create-dmg`。日后拿到 Developer ID 证书，改用 `TEAM=<团队 ID> ./scripts/release.sh` 走签名加公证，再执行 `publish.sh`。
 
-`publish.sh` 需要 `gh` 已登录。版本号沿用上游的 `MARKETING_VERSION`，本分支的修订号由 `REVISION` 区分，发布记录写进 [CHANGELOG.md](CHANGELOG.md)。
+`publish.sh` 需要 `gh` 命令行工具（`brew install gh`）。没装也能发：跑完 `release-local.sh`，在仓库的 Releases → Draft a new release 里手动填 tag `v<版本>-cn.<修订号>`，把 `dist/` 里的 DMG 拖上去即可，效果相同。版本号沿用上游的 `MARKETING_VERSION`，本分支的修订号由 `REVISION` 区分，发布记录写进 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 给 AI 代理的说明
 
