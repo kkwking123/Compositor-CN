@@ -76,6 +76,18 @@ git merge upstream/main
 
 冲突通常落在中文化改过字面量的那些文件里。解决方案与注意事项见 [docs/syncing-with-upstream.md](docs/syncing-with-upstream.md)。
 
+## 同步到 GitHub
+
+`scripts/auto-sync.sh` 是同步脚本：先看工作区有没有改动，有就先编译，**编译通过才**提交并推送；没有改动就直接退出，不会留下空提交。手动跑一次：
+
+```sh
+./scripts/auto-sync.sh
+```
+
+定时执行在这个仓库上暂时做不到，卡点不在脚本，在 macOS 的隐私机制：工程放在外置卷上，而 `launchd` 拉起的进程读不到外置卷，连 `ls` 都返回 `Operation not permitted`。`scripts/launchd/` 留了一份 plist 模板，等仓库搬到启动卷（例如 `~/Projects/`）后可以直接用；另一条路是给 `/bin/sh` 开「完全磁盘访问」，那等于让机器上所有脚本都能读全盘，不划算。
+
+所以这里的节奏是两条：改完代码当场推送，以及需要周期性兜底时用 Qoder 的定时任务排一次。推送走 SSH，`~/.ssh` 里那把密钥加到 GitHub 账号即可，私钥不需要密码短语；`upstream` 只读，脚本不会向它推任何东西。
+
 ## 发布
 
 ```sh

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- A template, not a working install on every machine. launchd's own processes can't read a repository that
+     lives on an external volume: macOS answers "Operation not permitted" for anything under /Volumes, so the
+     sync would fail quietly every third day. Load this only once the working copy sits on the boot volume —
+     or grant /bin/sh Full Disk Access, which hands every shell script on the Mac read access to the whole
+     disk and is a poor trade for one less manual run. See the "同步到 GitHub" section of README.md. -->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.kkwking.compositor-cn.auto-sync</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/sh</string>
+		<string>/Volumes/极空间HD/AI编程/coder/PS-compositor/scripts/auto-sync.sh</string>
+	</array>
+	<!-- 259200 seconds is three days. launchd counts while the Mac is awake, so a machine that sleeps
+	     through a due date runs the sync when it wakes rather than skipping it. -->
+	<key>StartInterval</key>
+	<integer>259200</integer>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardOutPath</key>
+	<string>/tmp/compositor-cn-auto-sync.out</string>
+	<key>StandardErrorPath</key>
+	<string>/tmp/compositor-cn-auto-sync.err</string>
+</dict>
+</plist>

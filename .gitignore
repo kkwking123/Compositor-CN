@@ -5,6 +5,7 @@ DerivedData/
 *.xcarchive
 *.dmg
 *.xcresult
+.build-autosync*
 
 # Xcode per-user state
 xcuserdata/
