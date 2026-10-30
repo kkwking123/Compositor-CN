@@ -93,7 +93,7 @@ struct ColorPickerSheet: View {
             hsb.hue = (1 - min(1, max(0, value.location.y / fieldSize))) * 360
         })
         .accessibilityLabel("Hue")
-        .accessibilityValue("\(Int(hsb.hue.rounded())) degrees")
+        .accessibilityValue(String(format: "%lld degrees".localized, Int(hsb.hue.rounded())))
     }
 
     private var preview: some View {
@@ -130,9 +130,9 @@ struct ColorPickerSheet: View {
                 hsb.setRGB(rgb)
             })
         return GridRow {
-            Text(label).frame(width: 14, alignment: .leading)
+            Text(label.localized).frame(width: 14, alignment: .leading)
                 .scrubbable(sensitivity: 1, value: channelValue, range: 0...255)
-            TextField(label, value: channelValue, format: .number)
+            TextField(label.localized, value: channelValue, format: .number)
                 .frame(width: 52)
                 .arrowSteps(value: { Double(Int((color[keyPath: channel] * 255).rounded())) },
                             change: { newValue in
@@ -215,7 +215,7 @@ struct DialogColorSwatch: View {
                 .contentShape(shape)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(title)
+        .accessibilityLabel(title.localized)
         .onChange(of: session.colorPicker?.color) { _, _ in session.previewDialogColor() }
         .onDisappear { Self.closePicker(session) }
     }

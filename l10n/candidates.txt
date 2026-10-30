@@ -1,0 +1,154 @@
+Add Hide-All Mask
+Add Reveal-All Mask
+Blur
+Brush Stroke
+Change GIF Delays
+Clear Guides
+Clone Stamp
+Convert to 16-Bit
+Convert to 8-Bit
+Copy Layer Mask
+Copy Layers from Project
+Create Clipping Mask
+Delete GIF Frame
+Delete GIF Frames
+Delete Guide
+Delete Layer
+Delete Layer Mask
+Delete Layers
+Disable Layer Mask
+Distort
+Distort Layer Mask
+Distort Layers
+Duplicate GIF Frame
+Duplicate Layer
+Duplicate Layers
+Edit Text
+Enable Layer Mask
+Erase
+Fill Text
+Flip Canvas Horizontal
+Flip Canvas Vertical
+Flip Horizontal
+Flip Vertical
+Group Layers
+Hide Layer
+Hide Layers
+Hide Selection
+Hide
+Show Layer
+Show Layers
+Show
+Hue/Saturation
+Import Photoshop File
+Import
+Invert Mask
+Invert
+Layer Blend Mode
+Layer Effects
+Layer Opacity
+Levels
+Link Layer Mask
+Move Guide
+Move Layer
+Move Selection
+New Blank Layer
+New Canvas
+New Folder
+New Guide
+New Text Layer
+Paint Mask
+Paste
+Release Clipping Mask
+Rename Layer
+Reorder Layers
+Replace Layer Mask
+Reveal Selection
+Rotate Canvas 90° Clockwise
+Rotate Canvas 90° Counterclockwise
+Spot Healing
+Split Channels
+Transform Layer
+Transform Layer Mask
+Transform Layers
+Transform Selection
+Ungroup Layers
+Unlink Layer Mask
+Layer via Copy
+Align Left Edges
+Align Right Edges
+Align Top Edges
+Align Bottom Edges
+Align Horizontal Centers
+Align Vertical Centers
+Align Left
+Align Center
+Align Right
+Align Justified
+Distribute Horizontal Centers
+Distribute Vertical Centers
+Distribute Horizontal Spacing
+Distribute Vertical Spacing
+Add Drop Shadow
+Add Stroke
+Add Color Overlay
+Add Inner Shadow
+Add Outer Glow
+Add Inner Glow
+Edit Drop Shadow
+Edit Stroke
+Edit Color Overlay
+Edit Inner Shadow
+Edit Outer Glow
+Edit Inner Glow
+Copy Drop Shadow
+Copy Stroke
+Copy Color Overlay
+Copy Inner Shadow
+Copy Outer Glow
+Copy Inner Glow
+Remove Drop Shadow
+Remove Stroke
+Remove Color Overlay
+Remove Inner Shadow
+Remove Outer Glow
+Remove Inner Glow
+Cancel Drop Shadow
+Cancel Stroke
+Cancel Color Overlay
+Cancel Inner Shadow
+Cancel Outer Glow
+Cancel Inner Glow
+Left Edges
+Right Edges
+Top Edges
+Bottom Edges
+Horizontal Centers
+Vertical Centers
+Horizontal Spacing
+Vertical Spacing
+Drop Shadow
+Inner Shadow
+Outer Glow
+Inner Glow
+Color Overlay
+Foreground color
+Background color
+Top left
+Top center
+Top right
+Middle left
+Center
+Middle right
+Bottom left
+Bottom center
+Bottom right
+Input black
+Input white
+Output black
+Output white
+Gamma
+RGB
+CMYK
+Play animation preview
+Pause animation preview

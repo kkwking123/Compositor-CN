@@ -120,10 +120,10 @@ struct ExportAsSheet: View {
                     .help("Show the whole image (⌘0)")
                 Button { zoomBy(1) } label: { Image(systemName: "plus.magnifyingglass") }
                     .disabled(JPEGPreview.step(from: shownZoom, in: 1) == nil)
-                    .help("Zoom in (⌘+), now \(percent). At 100% each pixel of the export is one pixel of the screen")
+                    .help(String(format: "Zoom in (⌘+), now %@. At 100%% each pixel of the export is one pixel of the screen".localized, percent))
                 Button { zoomBy(-1) } label: { Image(systemName: "minus.magnifyingglass") }
                     .disabled(JPEGPreview.step(from: shownZoom, in: -1) == nil)
-                    .help("Zoom out (⌘−), now \(percent)")
+                    .help(String(format: "Zoom out (⌘−), now %@".localized, percent))
             }
             .padding(.bottom, -8)
             ZStack {
@@ -144,7 +144,7 @@ struct ExportAsSheet: View {
                     // which takes the chosen one's name.
                     HStack(spacing: 12) {
                         Picker("Format", selection: $format) {
-                            ForEach([ExportFormat.jpeg, .png], id: \.self) { Text($0.rawValue).tag($0) }
+                            ForEach([ExportFormat.jpeg, .png], id: \.self) { Text($0.rawValue.localized).tag($0) }
                         }
                         .pickerStyle(.segmented).labelsHidden().fixedSize()
                         moreFormats
@@ -198,7 +198,7 @@ struct ExportAsSheet: View {
                 if format == .channelPack {
                     ForEach(Array(ChannelPack.Channel.allCases.enumerated()), id: \.offset) { index, channel in
                         GridRow {
-                            Text(channel.rawValue)
+                            Text(channel.rawValue.localized)
                             channelPicker(index, channel: channel)
                         }
                     }
@@ -247,7 +247,10 @@ struct ExportAsSheet: View {
                 if isReady, let result {
                     Text(ByteCountFormatter.string(fromByteCount: Int64(result.data.count), countStyle: .file)).monospacedDigit()
                 } else if error == nil {
-                    Text(format == .gif ? gifProgress.map { "Encoding frame \(min($0.completed + 1, $0.total)) of \($0.total)…" } ?? "Updating…" : "Updating…")
+                    Text(format == .gif
+                             ? gifProgress.map { String(format: "Encoding frame %1$@ of %2$@…".localized,
+                                                        "\(min($0.completed + 1, $0.total))", "\($0.total)") } ?? "Updating…".localized
+                             : "Updating…".localized)
                         .foregroundStyle(.secondary).monospacedDigit()
                 }
                 Button("Cancel") { DialogColorSwatch.closePicker(session); finish(nil) }.configuredNativeShortcut(.escape)
@@ -367,9 +370,9 @@ struct ExportAsSheet: View {
         return snapshot.gifExportLayers.contains { (snapshot.animations[$0.id]?.frames.count ?? 0) > 1 }
     }
     private var gifSummary: String {
-        guard !(snapshot?.gifExportLayers ?? []).isEmpty else { return "1 frame · Still canvas" }
+        guard !(snapshot?.gifExportLayers ?? []).isEmpty else { return "1 frame · Still canvas".localized }
         guard let schedule = gifSchedule else { return "—" }
-        let count = "\(schedule.frames.count) \(schedule.frames.count == 1 ? "frame" : "frames")"
+        let count = String(format: (schedule.frames.count == 1 ? "%lld frame" : "%lld frames").localized, schedule.frames.count)
         let durations = schedule.durations
         return "\(count) · \(durations.reduce(0, +).formatted(.number.precision(.fractionLength(0...2)))) s"
     }
@@ -388,7 +391,7 @@ struct ExportAsSheet: View {
     private func loadProfile() {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [UTType(filenameExtension: "icc") ?? .data, UTType(filenameExtension: "icm") ?? .data]
-        panel.message = "Choose a CMYK ICC profile, such as the one your printer gave you"
+        panel.message = "Choose a CMYK ICC profile, such as the one your printer gave you".localized
         guard panel.runModal() == .OK, let url = panel.url else { return }
         do { session.proofProfile = try CMYK.load(url) }
         catch { self.error = error.localizedDescription }
@@ -399,21 +402,22 @@ struct ExportAsSheet: View {
     @ViewBuilder private var moreFormats: some View {
         let others = formats.filter { $0 != .png && $0 != .jpeg }
         let chosen = others.contains(format)
-        let menu = Menu(chosen ? format.rawValue : "More") {
+        let menu = Menu(chosen ? format.rawValue.localized : "More".localized) {
             Picker("More formats", selection: $format) {
-                ForEach(others, id: \.self) { Text($0.rawValue).tag($0) }
+                ForEach(others, id: \.self) { Text($0.rawValue.localized).tag($0) }
             }
             .pickerStyle(.inline).labelsHidden()
         }
         .menuStyle(.button).fixedSize()
-        .help("Other formats: TIFF, PDF and GIF\(others.contains(.exr) ? ", EXR to keep light brighter than white" : ""), and Channel Pack for game textures")
+        .help(String(format: "Other formats: TIFF, PDF and GIF%@, and Channel Pack for game textures".localized,
+                     others.contains(.exr) ? ", EXR to keep light brighter than white".localized : ""))
         if chosen { menu.buttonStyle(.borderedProminent) } else { menu.buttonStyle(.bordered) }
     }
 
     /// A channel's source: one of the document's layers or groups, top first, or solid black or white.
     private func channelPicker(_ index: Int, channel: ChannelPack.Channel) -> some View {
         let layers = snapshot?.manifest.layers ?? []
-        return Picker(channel.rawValue, selection: $channels[index]) {
+        return Picker(channel.rawValue.localized, selection: $channels[index]) {
             Text("Black").tag(ChannelPack.Source.black)
             Text("White").tag(ChannelPack.Source.white)
             Divider()
@@ -422,7 +426,7 @@ struct ExportAsSheet: View {
             }
         }
         .labelsHidden().frame(width: 260)
-        .help("What fills the \(channel.rawValue.lowercased()) channel: a layer or group read as grayscale, or solid black or white")
+        .help(String(format: "What fills the %@ channel: a layer or group read as grayscale, or solid black or white".localized, channel.rawValue.localized))
     }
 
     private func sizeField(_ value: Int, set: @escaping (Int) -> Void) -> some View {
@@ -445,7 +449,7 @@ struct ExportAsSheet: View {
     private var pageSize: String {
         let dpi = raster.resolution > 0 ? raster.resolution : 72
         let inches = { (pixels: Int) in (Double(pixels) / dpi).formatted(.number.precision(.fractionLength(0...2))) }
-        return "\(inches(width)) × \(inches(height)) in at \(Int(dpi.rounded())) DPI"
+        return String(format: "%1$@ × %2$@ in at %3$@ DPI".localized, inches(width), inches(height), "\(Int(dpi.rounded()))")
     }
     private var percent: String { "\(Int((shownZoom * 100).rounded()))%" }
     private func zoomBy(_ direction: Int) {

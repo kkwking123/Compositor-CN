@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  This fork has no update feed. Sparkle's Check for Updates was removed because the upstream feed is signed with
+  the original author's key: applying one of its updates would replace this Chinese edition with the English
+  original, and Sparkle won't install over an ad-hoc signed build either. New versions come from
+  https://github.com/kkwking123/Compositor-CN/releases.
+
+  Config/Info.plist notes what turning the updater back on takes. If it comes back, this file becomes the feed:
+  an <item> per version, each with sparkle:version, sparkle:shortVersionString and an <enclosure> signed with
+  Sparkle's sign_update.
+-->
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
   <channel>
-    <title>Compositor</title>
-    <item>
-      <title>Version 1.5.12</title>
-      <pubDate>Tue, 27 Oct 2026 18:39:21 +0000</pubDate>
-      <sparkle:version>58</sparkle:version>
-      <sparkle:shortVersionString>1.5.12</sparkle:shortVersionString>
-      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-      <link>https://github.com/robbietilton/Compositor/releases/tag/v1.5.12</link>
-      <changes><![CDATA[New Rim Light filter: add up to three colored lights behind your subject, each with its own angle, strength, width and choke
-Glow lets the light bleed into the air around the subject and wrap over its edges, so it sits in the light instead of looking cut out
-Loose strands of hair catch the light, while busy backgrounds like crowds or rocks stay untouched]]></changes>
-      <enclosure url="https://github.com/robbietilton/Compositor/releases/download/v1.5.12/Compositor.dmg" sparkle:edSignature="qTOWfGHQb2vCn4ymiK12dsTFX15fCYZnXsgyfw6CH3tZ9W94oRP/d6/zxAwc/MA9wUmWyBufrdcO58OjNByaDQ==" length="8662558" type="application/octet-stream"/>
-    </item>
+    <title>Compositor 简体中文版</title>
+    <link>https://github.com/kkwking123/Compositor-CN/releases</link>
+    <description>本分支不提供自动更新，新版本从 Releases 页面下载。</description>
   </channel>
 </rss>

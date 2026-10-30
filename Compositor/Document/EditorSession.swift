@@ -100,7 +100,7 @@ enum NavigationTool: String, CaseIterable {
     /// Tools that draw and edit selections, sharing modifiers, moving, and nudging.
     var isSelectionTool: Bool { self == .marquee || self == .lasso || self == .wand }
     var symbol: String { self == .type ? "textformat" : self == .eyedropper ? "eyedropper" : self == .marquee ? "rectangle.dashed" : self == .lasso ? "lasso" : self == .wand ? "wand.and.stars" : self == .brush ? "paintbrush.pointed" : self == .spotHealing ? "bandage" : self == .cloneStamp ? "seal" : self == .blur ? "drop" : self == .gradient ? "square.bottomhalf.filled" : self == .shape ? "square.on.circle" : self == .crop ? "crop" : self == .move ? "arrow.up.left.and.arrow.down.right" : self == .hand ? "hand.raised" : "magnifyingglass" }
-    var label: String { self == .type ? "Type (T)" : self == .eyedropper ? "Eyedropper (I)" : self == .marquee ? "Marquee (M)" : self == .lasso ? "Lasso (L)" : self == .wand ? "Magic (W) · Tab switches Wand and Object" : self == .brush ? "Brush (B) · Eraser (E)" : self == .spotHealing ? "Spot Healing Brush (J)" : self == .cloneStamp ? "Clone Stamp (S) · Option-click sets the source" : self == .blur ? "Smear (R)" : self == .gradient ? "Gradient (G)" : self == .shape ? "Shape (U) · Shift-U switches Rectangle/Ellipse" : self == .crop ? "Crop (C)" : self == .move ? "Move / Transform (V)" : self == .hand ? "Hand (H)" : "Zoom (Z)" }
+    var label: String { (self == .type ? "Type (T)" : self == .eyedropper ? "Eyedropper (I)" : self == .marquee ? "Marquee (M)" : self == .lasso ? "Lasso (L)" : self == .wand ? "Magic (W) · Tab switches Wand and Object" : self == .brush ? "Brush (B) · Eraser (E)" : self == .spotHealing ? "Spot Healing Brush (J)" : self == .cloneStamp ? "Clone Stamp (S) · Option-click sets the source" : self == .blur ? "Smear (R)" : self == .gradient ? "Gradient (G)" : self == .shape ? "Shape (U) · Shift-U switches Rectangle/Ellipse" : self == .crop ? "Crop (C)" : self == .move ? "Move / Transform (V)" : self == .hand ? "Hand (H)" : "Zoom (Z)").localized }
 }
 
 private struct GIFLayerTimelineState {
@@ -819,12 +819,24 @@ final class EditorSession {
         return selectionAmountOperation == nil && colorRange == nil && textDraft == nil && document != nil && brushStroke == nil && warpStroke == nil && !isProjectBusy && !isImporting && !showsNewDocument && !showsImporter && renamingLayerID == nil && cropRect == nil && gradientEdit == nil && pixelMove == nil && hueSaturation == nil && levels == nil && filterEdit == nil && adjustmentEditingID == nil
     }
 
+    /// The name a new layer is given, numbered the way Photoshop numbers 图层 1, 图层 2. Names already in the
+    /// document are the person's own content and are never reworded, so the numbering only looks for a clash with
+    /// this language's own form — an English "Layer 1" saved earlier just sits beside a new 图层 1.
+    static func defaultLayerName(_ number: Int) -> String {
+        String(format: "Layer %@".localized, "\(number)")
+    }
+
+    /// A new folder's name, numbered the same way.
+    static func defaultFolderName(_ number: Int) -> String {
+        String(format: "Folder %@".localized, "\(number)")
+    }
+
     func addBlankLayer() {
         guard canEditLayers, let document else { return }
         let names = Set(document.layers.map(\.name))
         var number = 1
-        while names.contains("Layer \(number)") { number += 1 }
-        var layer = ImageLayer(name: "Layer \(number)", blankSize: document.size)
+        while names.contains(Self.defaultLayerName(number)) { number += 1 }
+        var layer = ImageLayer(name: Self.defaultLayerName(number), blankSize: document.size)
         layer.parentID = activeLayer?.isGroup == true ? activeLayerID : activeLayer?.parentID
         if let parent = layer.parentID { collapsedGroupIDs.remove(parent) }
         var insertion = document.layers.firstIndex { $0.id == activeLayerID }.map { $0 + 1 } ?? document.layers.count
@@ -902,7 +914,7 @@ final class EditorSession {
     }
     /// The menus' name for `toggleSelectedLayersVisibility`.
     var visibilityTitle: String {
-        (activeLayer?.isVisible == false ? "Show " : "Hide ") + (selectedLayerIDs.count > 1 ? "Layers" : "Layer")
+        (activeLayer?.isVisible == false ? "Show" : "Hide").localized + " " + (selectedLayerIDs.count > 1 ? "Layers" : "Layer").localized
     }
 
     /// Photoshop's eye swipe: pressing an eye shows or hides that layer, and dragging over other eyes gives them the
@@ -1047,7 +1059,7 @@ final class EditorSession {
                     }
                     for page in pages.reversed() { insert(page, centeredAt: point) }
                 } else if PSDReader.matches(url) {
-                    beginPSDReading(title: "Open “\(url.lastPathComponent)”?", confirmTitle: "Import")
+                    beginPSDReading(title: String(format: "Open “%@”?".localized, url.lastPathComponent), confirmTitle: "Import".localized)
                     let imported: PSDImport
                     do {
                         let parsed = try await ImageImporter.shared.loadPhotoshop(url, remainingPixels: DocumentLimits.documentPixelBudget - usedPixels)
@@ -1240,7 +1252,7 @@ final class EditorSession {
     /// One Photoshop artboard's layers as this tab's document, after the conversion report when there's anything in it.
     func importArtboard(_ parsed: PSDDocument, named name: String) async {
         do {
-            beginPSDReading(title: "Open “\(name)”?", confirmTitle: "Import")
+            beginPSDReading(title: String(format: "Open “%@”?".localized, name), confirmTitle: "Import".localized)
             let imported: PSDImport
             do {
                 let assets = try await ImageImporter.shared.photoshopAssets(parsed)
@@ -1317,13 +1329,13 @@ final class EditorSession {
     /// every pixel's detail.
     private static func firstLayer(size: CGSize, background: CGColor?) -> ImageLayer {
         guard let background, let context = try? BrushRaster.context(width: Int(size.width), height: Int(size.height), mask: false)
-        else { return ImageLayer(name: "Layer 1", blankSize: size) }
+        else { return ImageLayer(name: defaultLayerName(1), blankSize: size) }
         context.setFillColor(background)
         context.fill(CGRect(origin: .zero, size: size))
         guard let image = context.makeImage(), let thumbnail = try? PixelAdjust.thumbnail(of: image)
-        else { return ImageLayer(name: "Layer 1", blankSize: size) }
-        var layer = ImageLayer(name: "Background", blankSize: size)
-        layer.asset = ImportedImage(image: image, thumbnail: thumbnail, name: "Background")
+        else { return ImageLayer(name: defaultLayerName(1), blankSize: size) }
+        var layer = ImageLayer(name: "Background".localized, blankSize: size)
+        layer.asset = ImportedImage(image: image, thumbnail: thumbnail, name: "Background".localized)
         return layer
     }
 

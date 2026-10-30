@@ -1,0 +1,56 @@
+name: Upstream Watch
+
+# Tells the maintainer when the upstream author has moved on, so the Chinese edition can be brought up to date.
+# Nothing is merged automatically: the translation touches the same lines upstream does, and an automatic merge
+# would either conflict or, worse, quietly resolve to a state that compiles but reads wrong.
+on:
+  schedule:
+    - cron: '0 1 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          # History, to count what upstream has that this repository doesn't.
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/robbietilton/Compositor.git
+          git fetch --no-tags upstream main
+
+      - name: Open an issue when upstream has moved
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          behind=$(git rev-list --count HEAD..upstream/main)
+          echo "Upstream commits not in this repository: $behind"
+          if [ "$behind" -eq 0 ]; then
+            echo "Up to date."
+            exit 0
+          fi
+          title="上游有新提交，待同步"
+          # One open issue is enough; the weekly run shouldn't pile them up.
+          if gh issue list --state open --limit 100 --json title --jq '.[].title' | grep -q '^上游有新提交'; then
+            echo "An open issue already covers this."
+            exit 0
+          fi
+          latest=$(git log -1 --format='%h %s' upstream/main)
+          {
+            printf '上游 main 领先本仓库 %s 个提交。\n\n' "$behind"
+            printf '最新一条：`%s`\n\n' "$latest"
+            printf '处理步骤见 [docs/syncing-with-upstream.md](docs/syncing-with-upstream.md)。\n\n'
+            printf -- '---\n由 upstream-watch workflow 自动生成，处理完关闭即可。\n'
+          } > issue.md
+          gh issue create --title "$title（落后 $behind 个）" --body-file issue.md

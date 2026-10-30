@@ -55,7 +55,7 @@ struct CommandPaletteView: View {
             if entry.isOn {
                 Image(systemName: "checkmark").font(.caption.weight(.semibold)).frame(width: 12)
             }
-            Text(entry.title).lineLimit(1)
+            Text(entry.title.localized).lineLimit(1)
             Spacer()
             if let shortcut = entry.shortcut { Text(shortcut).font(.callout.monospaced()).foregroundStyle(.secondary) }
         }

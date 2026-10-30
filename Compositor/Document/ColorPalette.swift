@@ -317,17 +317,18 @@ enum ColorPickerTarget: Equatable {
     case text(draftID: UUID?)
     /// A dialog's own color, such as Export JPEG's background for transparency. The dialog is told as it changes.
     case dialog(title: String)
+    /// The color panel's title. AppKit puts it on the window as given, so every case is looked up here.
     var title: String {
         switch self {
-        case .text: return "Color Picker (Text Color)"
-        case .effect(let kind): return "Color Picker (\(kind.rawValue) Color)"
-        case .palette(let background): return background ? "Color Picker (Background Color)" : "Color Picker (Foreground Color)"
-        case .gradientMap(let highlights): return highlights ? "Color Picker (Gradient Map Highlights)" : "Color Picker (Gradient Map Shadows)"
-        case .vignette: return "Color Picker (Vignette Color)"
-        case .rimLight(let index): return "Color Picker (Light \(index + 1))"
-        case .volumetricLight: return "Color Picker (Light Color)"
-        case .dither(let light): return light ? "Color Picker (Light Color)" : "Color Picker (Dark Color)"
-        case .dialog(let title): return "Color Picker (\(title))"
+        case .text: return "Color Picker (Text Color)".localized
+        case .effect(let kind): return String(format: "Color Picker (%1$@ Color)".localized, kind.rawValue.localized)
+        case .palette(let background): return background ? "Color Picker (Background Color)".localized : "Color Picker (Foreground Color)".localized
+        case .gradientMap(let highlights): return highlights ? "Color Picker (Gradient Map Highlights)".localized : "Color Picker (Gradient Map Shadows)".localized
+        case .vignette: return "Color Picker (Vignette Color)".localized
+        case .rimLight(let index): return String(format: "Color Picker (Light %1$@)".localized, "\(index + 1)")
+        case .volumetricLight: return "Color Picker (Light Color)".localized
+        case .dither(let light): return light ? "Color Picker (Light Color)".localized : "Color Picker (Dark Color)".localized
+        case .dialog(let title): return String(format: "Color Picker (%1$@)".localized, title.localized)
         }
     }
 }

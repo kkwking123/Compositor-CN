@@ -41,8 +41,22 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldUseLaunchSchemeArgsEnv = "NO"
       shouldAutocreateTestPlan = "YES">
+      <!-- The suites assert the interface's English text — menu titles, sheet labels, the overflow pill. The app
+           follows the Mac's language, so on a Chinese system they'd all fail; these keep the test host in English.
+           They land in NSArgumentDomain, which outranks the AppleLanguages the app writes when a language is
+           picked from its menu. -->
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-AppleLanguages"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "(en)"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"

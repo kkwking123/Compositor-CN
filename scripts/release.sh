@@ -1,20 +1,27 @@
 #!/bin/zsh
-# Builds a signed, notarized Compositor DMG that opens without warnings on any Mac.
+# Builds a signed, notarized DMG that opens without warnings on any Mac — the path for when a Developer ID
+# certificate is available. Without one, use scripts/release-local.sh: it packages an ad-hoc signed DMG instead,
+# which opens after a right-click > Open on first launch.
 #
 # Needs, all kept out of this repository:
 #   - a "Developer ID Application" certificate in the login keychain
 #   - notarization credentials saved once with:
-#       xcrun notarytool store-credentials "compositor-notary" --apple-id "…" --team-id 3E4X3B9Z9T
+#       xcrun notarytool store-credentials "compositor-notary" --apple-id "…" --team-id <your team id>
 #   - create-dmg (brew install create-dmg)
+# Set TEAM (and IDENTITY, NOTARY_PROFILE if they differ) in the environment; nothing here is tied to one team.
 # The DMG window background is scripts/dmg/dmg-bg.jpg (600 × 380, the window's exact size) plus
 # dmg-bg-retina.jpg (1200 × 760) for Retina displays.
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 APP=Compositor
-TEAM=3E4X3B9Z9T
-IDENTITY="Developer ID Application"
-NOTARY_PROFILE=compositor-notary
+TEAM="${TEAM:-}"
+IDENTITY="${IDENTITY:-Developer ID Application}"
+NOTARY_PROFILE="${NOTARY_PROFILE:-compositor-notary}"
+if [[ -z "$TEAM" ]]; then
+  echo "Set TEAM to your Apple Developer team id, or run scripts/release-local.sh for an ad-hoc signed DMG."
+  exit 1
+fi
 # Built outside Dropbox: the extended attributes it adds to files make code signing fail.
 WORK="$HOME/Library/Caches/CompositorRelease"
 DIST="$PROJECT_DIR/dist"

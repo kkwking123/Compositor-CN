@@ -1,0 +1,39 @@
+name: 翻译问题
+description: 漏译、错译、中文被截断或读不通
+labels: [translation]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: 出现在哪里
+      description: 菜单路径或面板名称，越具体越好
+      placeholder: Image › Canvas Size… 对话框里的「保持比例」
+    validations:
+      required: true
+  - type: input
+    id: current
+    attributes:
+      label: 现在显示的是什么
+    validations:
+      required: true
+  - type: input
+    id: suggested
+    attributes:
+      label: 建议改成什么
+      description: 可以留空，只报告问题也可以
+    validations:
+      required: false
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 截图
+      description: 文字被截断或排版错位时，截图比文字描述清楚得多
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 确认
+      options:
+        - label: 这不是上游功能本身的问题（功能问题请报给上游）
+          required: true

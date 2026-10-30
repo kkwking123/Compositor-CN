@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>Compositor-CN</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -55,14 +57,15 @@
 			<string>Alternate</string>
 		</dict>
 	</array>
+	<!-- Sparkle's updater is turned off in this build: updates are signed with the upstream author's key, so
+	     pointing the feed at upstream would replace this Chinese edition with the English original. Downloads come
+	     from this fork's Releases page instead. To turn it back on, generate a key pair with Sparkle's
+	     generate_keys, set SUFeedURL to this repository's appcast.xml and SUPublicEDKey to the new public key,
+	     then restore the updater's startup in CompositorApplicationDelegate and the menu item in CompositorApp. -->
 	<key>SUEnableInstallerLauncherService</key>
-	<true/>
-	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/robbietilton/Compositor/main/appcast.xml</string>
-	<key>SUPublicEDKey</key>
-	<string>KZvD724t8QpzTR4OGrHrsCWt538TJ/g/qrTZii+o214=</string>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

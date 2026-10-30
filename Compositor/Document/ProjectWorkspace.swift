@@ -10,6 +10,18 @@ final class ProjectTab: Identifiable {
     /// Shown until the project is saved: Untitled, the opened file's name, or a Photoshop artboard's.
     var defaultName: String
     var title: String { session.projectURL?.deletingPathExtension().lastPathComponent ?? defaultName }
+    /// The form to show. `title` stays English because the placeholder doubles as the numbering key the
+    /// workspace compares against; a saved file's name is shown exactly as it is on disk, since looking a
+    /// path component up in the string table would rename somebody's document.
+    var displayTitle: String {
+        guard session.projectURL == nil else { return title }
+        if title == "Untitled" { return "Untitled".localized }
+        let prefix = "Untitled "
+        guard title.hasPrefix(prefix) else { return title }
+        let number = title.dropFirst(prefix.count)
+        guard !number.isEmpty, number.allSatisfy(\.isNumber) else { return title }
+        return String(format: "Untitled %@".localized, String(number))
+    }
     init(name: String) {
         defaultName = name
         session = EditorSession()
@@ -263,9 +275,9 @@ final class ProjectWorkspace {
         }
         let used = target.session.document?.layers.reduce(0) { $0 + ($1.asset.map { $0.image.width * $0.image.height } ?? 0) } ?? 0
         let added = copied.reduce(0) { $0 + ($1.asset.map { $0.image.width * $0.image.height } ?? 0) }
-        guard used + added <= DocumentLimits.documentPixelBudget else { target.session.importError = "The copied layers exceed this project’s \(DocumentLimits.documentBudgetMegapixels)-megapixel limit."; return }
+        guard used + added <= DocumentLimits.documentPixelBudget else { target.session.importError = String(format: "The copied layers exceed this project’s %lld-megapixel limit.".localized, DocumentLimits.documentBudgetMegapixels); return }
         guard target.session.canRetainGIFSources(in: (target.session.document?.layers ?? []) + copied) else {
-            target.session.importError = "The copied GIFs exceed this project’s animation memory limit."
+            target.session.importError = "The copied GIFs exceed this project’s animation memory limit.".localized
             return
         }
         isManaging = true

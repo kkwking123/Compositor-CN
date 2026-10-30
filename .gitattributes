@@ -1,0 +1,23 @@
+# Text files keep LF whatever machine they're edited on; the strings tables and Swift sources are UTF-8.
+* text=auto eol=lf
+
+*.swift text
+*.md text
+*.pl text
+*.sh text
+*.yml text
+*.yaml text
+*.strings text
+
+# Artwork, screenshots and test fixtures: never diff or merge them as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.heic binary
+*.tiff binary
+*.icns binary
+*.xcresult binary
+*.dmg binary
+*.psd binary
+*.psb binary

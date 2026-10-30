@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 上游版本的功能问题
+    url: https://github.com/robbietilton/Compositor/issues
+    about: 官方英文版也有的崩溃、功能缺失与性能问题，请报到上游仓库
+  - name: 从源码编译的说明
+    url: https://github.com/kkwking123/Compositor-CN#从源码编译
+    about: 编译失败时先看 README 里的构建步骤与系统要求

@@ -29,6 +29,13 @@ jobs:
           # History, to see what a push changed.
           fetch-depth: 0
 
+      # The Chinese table has to cover the keys the code asks for, and its format specifiers have to match the
+      # English ones: one mismatched placeholder crashes the app the moment that panel opens. Perl only, no Xcode.
+      - name: Check the Chinese table
+        run: |
+          perl l10n/check_coverage.pl Compositor Compositor/zh-Hans.lproj/Localizable.strings
+          perl l10n/check_placeholders.pl
+
       # The filter suites (Camera Raw, Hue/Saturation, Levels, the filters) run only when something they cover
       # changed. The project file counts, so a version bump runs them all and every release is checked in full.
       - name: Decide whether the filter suites run
@@ -54,12 +61,7 @@ jobs:
       - name: Select Xcode 26.6
         run: sudo xcode-select -s /Applications/Xcode_26.6.app
 
-      - name: Resolve Swift packages
-        run: >
-          xcodebuild -resolvePackageDependencies
-          -project Compositor.xcodeproj
-          -scheme Compositor
-          -onlyUsePackageVersionsFromResolvedFile
+      # No Swift packages to resolve: this fork removed Sparkle, the only one upstream had.
 
       # Optimized, as in a release, still testable: unoptimized, pixel loops (the app's and the tests' own) take
       # many times longer.

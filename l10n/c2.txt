@@ -1,0 +1,72 @@
+%1$@ %2$@ is ready to install — you have %3$@.
+%1$@ %2$@ is now available — you have %3$@. Would you like to download it now?
+A new version of %@ is available!
+Remind Me Later
+Skip This Version
+Install and Relaunch
+Install Update
+Automatically download and install updates in the future
+What’s new
+Export Layer as PNG
+Export %lld Layers as PNGs
+Choose a folder for the layers’ PNGs.
+Export
+“%@” already exists. Replace it?
+%lld of these files already exist in “%@”. Replace them?
+Replace
+“%@” has nothing to export
+%lld layers have nothing to export
+A layer with no visible pixels, such as an adjustment layer, isn’t saved as a PNG.
+Save Project As
+Save Project
+Open Project
+Save changes to %@?
+Your changes will be lost if you don’t save them.
+Don’t Save
+Untitled
+“%@” was changed on disk.
+Another app changed this project. You can revert to the version on disk, losing your unsaved changes, or keep what you have.
+Revert
+Keep Mine
+This layer supplies a live mask
+These layers supply live masks
+Bake and Delete
+Remove Links and Delete
+Bake keeps the current masked appearance in the dependent layers’ pixels. Remove Links reveals their pixels. You can undo either choice.
+Choose a CMYK ICC profile, such as the one your printer gave you
+Press keys…
+Press a shortcut
+Choose a single key with optional modifiers.
+Text-editing shortcuts need Command, Option, or Control so they do not replace normal typing.
+%@ is reserved by macOS
+%1$@ is assigned to both %2$@ and %3$@.
+Search Fonts
+Search Layers
+Selected
+Select layer; Cmd-click to select its pixels (Cmd-Shift adds, Cmd-Option subtracts)
+1 frame · Still canvas
+%1$@ × %2$@ in at %3$@ DPI
+%1$@. Double-click to reset.
+Open “%@”?
+Import
+Reading the file to see what needs converting.
+Compositor will convert these Photoshop features. Nothing is applied until you continue.
+Reading the Photoshop file…
+Cropped to the canvas so the file fits in memory. Pixels outside the canvas weren't imported.
+The layer mask couldn’t be converted to 8-bit grayscale and was skipped.
+This clipping mask’s base isn’t supported, so clipping was skipped.
+%lld frame
+%lld frames
+Layer Mask
+CMYK Gamut Warning
+CMYK Proof
+Stop viewing the mask
+Show the image again (or Option-click the mask thumbnail)
+Hide the gamut warning
+Stop marking colors the profile can't print
+Stop proofing
+Show the document's own colors again
+The copied layers exceed this project’s %@-megapixel limit.
+The copied GIFs exceed this project’s animation memory limit.
+Stop
+Add

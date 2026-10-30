@@ -106,12 +106,12 @@ struct GIFTimeline: View {
             Button("Delete Frame") { Task { await onDeleteFrame(frame.index) } }.disabled(!canEditFrames || frames.count < 2)
         }
         .id(frame.index)
-        .accessibilityLabel("Frame \(number)")
+        .accessibilityLabel(String(format: "Frame %lld".localized, number))
     }
 
     /// Every frame for the same time, from a fast 20 ms up to a second, or each for the GIF's own.
     @ViewBuilder private var delayMenu: some View {
-        Toggle("\(originalDelays()) · Original", isOn: Binding(get: { timing.mode != .uniform }, set: { on in
+        Toggle(String(format: "%@ · Original".localized, originalDelays()), isOn: Binding(get: { timing.mode != .uniform }, set: { on in
             guard on else { return }
             var original = timing
             original.mode = .perFrame

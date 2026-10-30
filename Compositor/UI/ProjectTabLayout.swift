@@ -25,9 +25,9 @@ struct ProjectTabOverflow: Equatable {
     var contentWidth: CGFloat { visible.last.map { $0.x + $0.width } ?? pill.map { $0.x + $0.width } ?? 0 }
 }
 
-/// "N more tabs", singular for one.
+/// "N more tabs", singular for one. The count is filled in after lookup, so a language that says it last can move it.
 func projectTabOverflowLabel(for hiddenCount: Int) -> String {
-    hiddenCount == 1 ? "1 more tab" : "\(hiddenCount) more tabs"
+    hiddenCount == 1 ? "1 more tab".localized : String(format: "%lld more tabs".localized, hiddenCount)
 }
 
 /// Lays out the strip left to right: everything shows when it all fits. Otherwise tabs are dropped from the

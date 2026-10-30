@@ -79,7 +79,7 @@ final class FontListPanel: NSPanel, NSTableViewDataSource, NSTableViewDelegate, 
         search.drawsBackground = false
         search.focusRingType = .none
         search.font = .systemFont(ofSize: NSFont.systemFontSize)
-        search.placeholderString = "Search Fonts"
+        search.placeholderString = "Search Fonts".localized
         search.cell?.usesSingleLineMode = true
         search.cell?.isScrollable = true
         search.delegate = self

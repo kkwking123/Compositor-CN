@@ -1,0 +1,174 @@
+/* 本轮界面排查补录：工具选项栏、状态提示、滤镜与 Camera Raw 参数、导出与新建画布。
+   Keys are the English source text; the value is what shows when the app runs in Chinese. */
+
+/* 工具选项栏标题与选区修改 */
+"Marquee" = "选框";
+"Magic" = "魔棒";
+"Contract" = "收缩";
+"Smooth selection edges; turn off for hard pixel edges" = "平滑选区边缘；关闭则保留硬像素边缘";
+"Smooth the detected object outline; turn off for the raw pixel mask" = "平滑识别出的对象轮廓；关闭则使用原始像素蒙版";
+"Brush" = "画笔";
+"Eraser" = "橡皮擦";
+"Smear" = "涂抹";
+"Strength" = "强度";
+"Transform" = "变换";
+"Transform Mask" = "变换蒙版";
+"Scale" = "缩放";
+"Distribute %@ (three or more layers)" = "分布 %@（需三个及以上图层）";
+"square" = "正方形";
+"circle" = "圆形";
+
+/* 画布空状态、图层面板与标签页 */
+"No layers yet" = "还没有图层";
+"No layers match the filter." = "没有符合筛选条件的图层。";
+"Create a canvas or import a file." = "新建画布或导入文件。";
+"Import a file or add a blank layer." = "导入文件或添加空白图层。";
+"Search layers" = "搜索图层";
+"Search layers by name" = "按名称搜索图层";
+"Close search" = "关闭搜索";
+"Close the search" = "关闭搜索";
+"Delete layer mask" = "删除图层蒙版";
+"Delete selected effect" = "删除所选效果";
+"Delete selected layer" = "删除所选图层";
+"Delete selected layers" = "删除所选图层";
+"Add layer mask (Option-click for a black mask)" = "添加图层蒙版（Option 单击为黑色蒙版）";
+"Add layer mask revealing the selection (Option-click to hide it)" = "添加图层蒙版并按选区显示（Option 单击为隐藏）";
+"Add to %@" = "添加到 %@";
+"New canvas (⌘N) · Drop images here for new tabs" = "新建画布 (⌘N) · 将图像拖到这里可开新标签";
+"Open in a new project tab" = "在新项目标签中打开";
+"Mask foreground" = "蒙版前景色";
+"Mask background" = "蒙版背景色";
+
+/* 画布尺寸与新建画布提示 */
+"Transparent canvas" = "透明画布";
+"White canvas" = "白色画布";
+"Black canvas" = "黑色画布";
+"Extension Color" = "扩展颜色";
+"Enter whole numbers from 1 to %@ pixels." = "请输入 1 到 %@ 像素之间的整数。";
+"Enter a size up to %@ pixels at this DPI." = "请按此 DPI 输入不超过 %@ 像素的尺寸。";
+"Result: %1$@ × %2$@ pixels" = "结果：%1$@ × %2$@ 像素";
+"Use 1–%@ pixels per side, up to %@ megapixels, and 1–9,600 pixels/inch." = "每边 1–%@ 像素，最多 %@ 百万像素，分辨率 1–9,600 像素/英寸。";
+"A subdivision every %@ pixels." = "每 %@ 像素一条细分线。";
+"Use gridlines every %1$@–%2$@ pixels and %3$@–%4$@ subdivisions, no more than the pixels between gridlines." = "网格线间隔 %1$@–%2$@ 像素，细分数 %3$@–%4$@，且不超过两条网格线之间的像素数。";
+"Set a radius above 0 to use smooth corners." = "需将圆角半径设为大于 0 才能使用平滑圆角。";
+"Use smooth squircle corners at 60% smoothing, matching Figma's iOS setting" = "使用 60% 平滑的方圆形圆角，与 Figma 的 iOS 设置一致";
+"%1$@ × %2$@ px" = "%1$@ × %2$@ 像素";
+"Instagram Square" = "Instagram 方形";
+"Instagram Portrait" = "Instagram 竖图";
+"Instagram Story" = "Instagram 快拍";
+"YouTube Thumb" = "YouTube 缩略图";
+"Studio Display" = "Studio 显示器";
+
+/* 画布下方的操作提示（工具栏底部一行） */
+"Drag a rectangle · Shift add · Option subtract · Shift again mid-drag square · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" = "拖拽矩形 · Shift 加选 · Option 减选 · 拖动中再按 Shift 画正方形 · 在选区内拖拽移动 · ⌘ 拖拽移动像素 · Delete 清除 · ⌘D 取消选择";
+"Drag an ellipse · Shift add · Option subtract · Shift again mid-drag circle · Drag inside to move · Delete clears · ⌘D deselect" = "拖拽椭圆 · Shift 加选 · Option 减选 · 拖动中再按 Shift 画正圆 · 在选区内拖拽移动 · Delete 清除 · ⌘D 取消选择";
+"Click an object to select its outline · Tab for Wand · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" = "点按对象以选择其轮廓 · Tab 切换魔棒 · Shift 加选 · Option 减选 · 在选区内拖拽移动 · ⌘ 拖拽移动像素 · Delete 清除 · ⌘D 取消选择";
+"Click to select similar colors · Tab for Object · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" = "点按选择相近颜色 · Tab 切换对象 · Shift 加选 · Option 减选 · 在选区内拖拽移动 · ⌘ 拖拽移动像素 · Delete 清除 · ⌘D 取消选择";
+"Drag to select · Drag inside to move · Shift add · Option subtract · Delete clears · ⌥⌫/⌘⌫ fill · ⌘D deselect" = "拖拽选择 · 在选区内拖拽移动 · Shift 加选 · Option 减选 · Delete 清除 · ⌥/⌘⌫ 填充 · ⌘D 取消选择";
+"Click corners · Click start, double-click or Enter to close · Delete removes corner · Escape cancel" = "点按角点 · 点按起点、双击或回车闭合 · Delete 删除角点 · Esc 取消";
+"Drag to paint" = "拖拽绘制";
+"Drag to erase" = "拖拽擦除";
+"Drag to soften" = "拖拽柔化";
+"Drag to smudge" = "拖拽涂抹";
+"Drag to push pixels" = "拖拽推移像素";
+" · [ ] size · Shift-[ ] hardness · 1–0 opacity · Escape cancel · Space to pan" = " · [ ] 大小 · Shift-[ ] 硬度 · 1–0 不透明度 · Esc 取消 · 空格键平移";
+" · [ ] size · Shift-[ ] hardness · 1–0 strength · Space to pan" = " · [ ] 大小 · Shift-[ ] 硬度 · 1–0 强度 · 空格键平移";
+"Option-click to set the source · Drag to clone · [ ] size · Shift-[ ] hardness · 1–0 opacity · Space to pan" = "Option 单击设定源 · 拖拽仿制 · [ ] 大小 · Shift-[ ] 硬度 · 1–0 不透明度 · 空格键平移";
+"Drag over blemishes to heal · [ ] size · Shift-[ ] hardness · Escape cancel · Space to pan" = "在瑕疵上拖拽修复 · [ ] 大小 · Shift-[ ] 硬度 · Esc 取消 · 空格键平移";
+"Drag a text box · Click text to edit · Drag box handles to resize · ⌘Return finish · Escape cancel" = "拖出文本框 · 点按文字编辑 · 拖拽控制点调整大小 · ⌘回车完成 · Esc 取消";
+"Drag to draw a shape on a new layer · Shift %@ · Option from center · Shift-U or Tab for the next shape · Escape cancel · Space to pan" = "拖拽在新图层上绘制形状 · Shift %@ · Option 从中心 · Shift-U 或 Tab 切换形状 · Esc 取消 · 空格键平移";
+"Drag to draw · Drag ends to adjust · Shift 45° · 1–0 opacity · Enter apply · Escape cancel" = "拖拽绘制 · 拖拽端点调整 · Shift 45° · 1–0 不透明度 · 回车应用 · Esc 取消";
+"Drag to crop · Enter apply · Escape cancel · Space to pan" = "拖拽裁剪 · 回车应用 · Esc 取消 · 空格键平移";
+"Drag to move · Handles to resize · Circle to rotate · 1–0 layer opacity · Space to pan" = "拖拽移动 · 控制点缩放 · 绕圈旋转 · 1–0 图层不透明度 · 空格键平移";
+"Drag to pan · Pinch to zoom" = "拖拽平移 · 捏合缩放";
+"No tool selected · Press a tool's key to pick one · Space to pan" = "未选择工具 · 按下工具快捷键即可选择 · 空格键平移";
+"Click to zoom in · Option-click to zoom out · Drag right or left to zoom smoothly · Space to pan" = "点按放大 · Option 点按缩小 · 左右拖拽平滑缩放 · 空格键平移";
+
+/* 颜色范围与取色 */
+"Click the image to pick the color to select." = "在图像上点按要选择的颜色。";
+"Shift-click adds a color, Option-click takes one away." = "Shift 单击添加颜色，Option 单击移除颜色。";
+"Click the image to select that color" = "在图像上点按选择该颜色";
+"Click the image to add that color to the selection" = "在图像上点按将该颜色加入选区";
+"Click the image to take that color out of the selection" = "在图像上点按将该颜色移出选区";
+"Green" = "绿色";
+
+/* 滤镜参数名 */
+"Applying…" = "正在应用…";
+"Cell Size" = "单元格大小";
+"Pixel Size" = "像素大小";
+"Text Size" = "文字大小";
+"Tones" = "色阶";
+"Density" = "密度";
+"Choose the dark color" = "选择暗色";
+"Choose the light color" = "选择亮色";
+"Choose the screen's color" = "选择网屏颜色";
+"Choose the lines' color" = "选择线条颜色";
+"Black Level" = "黑色级别";
+"Color Split" = "色彩分离";
+"Displace" = "位移";
+"Smoothness" = "平滑度";
+"Threshold" = "阈值";
+"Wobble" = "摆动";
+"Line Spacing" = "行距";
+"Thickness" = "粗细";
+"Angle" = "角度";
+"Distance" = "距离";
+"Midpoint" = "中点";
+"Roundness" = "圆度";
+"Remove Distortion" = "删除畸变";
+"Refine" = "细化";
+"Shift Edge" = "位移边缘";
+"Intensity" = "强度";
+"Length" = "长度";
+"Shafts" = "光束";
+"Choke" = "收缩";
+"Copies" = "副本数";
+"Offset" = "偏移";
+"Fringe" = "色边";
+"Brightness" = "亮度";
+
+/* Camera Raw 面板 */
+"Hue Shift" = "色相偏移";
+"Hue Range" = "色相范围";
+"Saturation Shift" = "饱和度偏移";
+"Saturation Range" = "饱和度范围";
+"Luminance Shift" = "明度偏移";
+"Luminance Range" = "明度范围";
+"Shifts the picked color around the color wheel." = "在色轮上转动所选颜色。";
+"Makes the picked color stronger or quieter." = "让所选颜色更鲜艳或更柔和。";
+"Makes the picked color lighter or darker." = "让所选颜色更亮或更暗。";
+"How far in hue the adjustment reaches." = "调整在色相方向的影响范围。";
+"How far in saturation the adjustment reaches." = "调整在饱和度方向的影响范围。";
+"How far in brightness the adjustment reaches." = "调整在亮度方向的影响范围。";
+"Balance" = "平衡";
+"Blending" = "混合";
+"Shifts the wheels toward shadows or highlights." = "让色轮偏向暗部或高光。";
+"Controls how much the three tonal wheels overlap." = "控制三个色调色轮的重叠程度。";
+"Brightness added by this wheel." = "此色轮增加的亮度。";
+"Highlight Clipping Indicator" = "高光溢色指示";
+"Shadow Clipping Indicator" = "暗部溢色指示";
+"Show clipped highlights in red on the preview." = "在预览中以红色显示过曝的高光。";
+"Show clipped shadows in blue on the preview." = "在预览中以蓝色显示欠曝的暗部。";
+"RGB histogram" = "RGB 直方图";
+"Smooths grain, at the cost of fine detail" = "抹除颗粒，但会损失细节";
+"Not available for this camera" = "此相机不支持该功能";
+"Removes the lens's distortion and vignetting" = "消除镜头畸变与暗角";
+"This file has no lens profile" = "此文件没有镜头描述文件";
+"Brings back detail in bright areas the camera partly clipped" = "找回相机部分过曝的高光细节";
+
+/* 导出与 GIF */
+"Updating…" = "正在更新…";
+"Encoding frame %1$@ of %2$@…" = "正在编码第 %1$@ 帧，共 %2$@ 帧…";
+"Pause" = "暂停";
+"Pause the animation preview." = "暂停动画预览。";
+"Play the animation preview." = "播放动画预览。";
+"Each channel from a layer, read as grayscale · PNG" = "图层的每个通道，按灰度读取 · PNG";
+"Up to 256 colors · sRGB" = "最多 256 色 · sRGB";
+"Brighter than white kept · Transparency kept" = "保留高于白色的亮度 · 保留透明度";
+"Transparency kept · sRGB" = "保留透明度 · sRGB";
+"CMYK – %@" = "CMYK – %@";
+"No profile" = "无描述文件";
+"Original pixels · alpha-weighted histogram" = "原始像素 · 按 Alpha 加权的直方图";
+"Original pixels · selection and alpha-weighted histogram" = "原始像素 · 按选区与 Alpha 加权的直方图";
+"Underlying pixels · alpha-weighted histogram" = "下方像素 · 按 Alpha 加权的直方图";
+"CMYK Proof Colors" = "CMYK 校样颜色";

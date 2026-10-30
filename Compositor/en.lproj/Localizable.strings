@@ -1,0 +1,10 @@
+/*
+ English strings. The source literals are already English, so almost nothing belongs here: a lookup that finds
+ no entry returns the English text unchanged, which is what an English user should see.
+
+ What does belong here is text that only exists once the other language is chosen — a Chinese sentence the code
+ asks for by its English key, which would otherwise show through in an English interface. Nothing does today:
+ the language menu names each language in that language's own letters, which needs no lookup. So this file is
+ kept for the pairing, not for its contents — a lone `zh-Hans.lproj` under a synchronized root group is the one
+ shape Xcode may fail to read as a variant group, and the English side is what makes the pair unambiguous.
+*/

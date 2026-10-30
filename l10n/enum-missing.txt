@@ -1,0 +1,273 @@
+,
+.
+A little stronger than Version 1. The sliders below still fall well short of the current look.
+ASCII
+Add
+Add Noise
+Advanced
+Alpha
+Anamorphic Flare
+Atkinson (Classic Mac)
+Basic
+Bayer 2 × 2
+Bayer 4 × 4
+Bayer 8 × 8
+Black & White
+Bloom
+Bloom / Glow
+Blue
+Blues
+Blur
+Bokeh
+Bottom Edges
+Bottom Right Pixel Color
+Brush (B) · Eraser (E)
+CIColorBurnBlendMode
+CIColorDodgeBlendMode
+CIDivideBlendMode
+CIHardMixBlendMode
+CILinearBurnBlendMode
+CILinearDodgeBlendMode
+CILinearLightBlendMode
+CIPinLightBlendMode
+CISoftLightBlendMode
+CISubtractBlendMode
+CIVividLightBlendMode
+Calibration
+Camera Raw Filter
+Cat's Eye
+Center
+Centimeters
+Channel Pack
+Click the image to center this range on that color
+Click the image to narrow this range to exclude that color
+Click the image to widen this range to include that color
+Clone Stamp (S) · Option-click sets the source
+Close to the current process, with slightly softer primary and shadow shifts.
+Color + neutral midtones
+Color Balance
+Color Burn
+Color Dodge
+Color Grading
+Color Mixer
+Color Priority
+Content-Aware
+Content-Aware Fill
+Contract
+Contrast
+Create Texture
+Crop (C)
+Current default. The calibration sliders below apply at full strength.
+Curves
+Cyan
+Cyans
+Darken
+Dashed
+Dashed Lines
+Detail
+Difference
+Diffusion
+Dither
+Divide
+Dot
+Dots
+Dotted
+EXR
+Earliest response. Hue, saturation, and shadow tint move about half as far as Version 6.
+Effects
+Ellipse
+Erase
+Exclusion
+Expand
+Exposure
+Eyedropper (I)
+Firmer color than Version 2. Primary shifts stay gentler than the current process.
+Floyd–Steinberg
+Foreground to Background
+Foreground to Transparent
+Frame delay
+Freehand
+GIF
+Gaussian Blur
+Geometry
+Global
+Gradient (G)
+Gradient Map
+Gray
+Green
+Greens
+Guided
+HSL
+Halation
+Halftone Diamonds
+Halftone Dots
+Halftone Lines
+Hand (H)
+Hard Light
+Hard Mix
+Hexagon
+High quality
+Highlight Priority
+Horizontal Centers
+Horizontal Spacing
+Hue/Saturation
+Inches
+JPEG
+Lasso (L)
+Left Edges
+Lens Effects
+Levels
+Light Blue
+Light Gray
+Light Red
+Lighten
+Line
+Linear Burn
+Linear Dodge (Add)
+Linear Light
+Lines
+Liquify
+Long Dash
+Luminance
+Luminosity
+Mac Patterns
+Magenta
+Magentas
+Magic (W) · Tab switches Wand and Object
+Marquee (M)
+Master
+Medium Blue
+Millimeters
+Mist
+Motion Blur
+Move / Transform (V)
+Multiply
+Nearest
+Normal
+Object
+Off
+Optics
+Original
+Oval
+Overlay
+PDF
+PNG
+Paint Overlay
+Parametric
+Percent
+Perspective
+Pin Light
+Pixels
+Point
+Point Color
+Polygonal
+Prism
+Progressive Blur
+Proximity Match
+RGB Split
+Rectangle
+Rectilinear
+Red
+Reds
+Remove
+Remove Background
+Right Edges
+Rim Light
+Round
+Same for all
+Saturation
+Scanlines
+Screen
+Shape (U) · Shift-U switches Rectangle/Ellipse
+Sharpen
+Smear (R)
+Smooth
+Smudge
+Soft Light
+Solid
+Spot Healing Brush (J)
+Square
+Starburst
+Subtract
+TIFF
+The 2012 response. Calibration reaches most of the strength used by Version 6.
+Three-Way
+Tonal Contrast
+Top Edges
+Top Left Pixel Color
+Transparent Pixels
+Two Colors
+Type (T)
+Version 1
+Version 2
+Version 3
+Version 4
+Version 5
+Version 6
+Vertical Centers
+Vertical Spacing
+Vivid Light
+Volumetric Light
+Wand
+Yellow
+Yellows
+Zoom (Z)
+\(rawValue.capitalized) canvas
+a
+align.horizontal.center
+align.horizontal.left
+align.horizontal.right
+align.vertical.bottom
+align.vertical.center
+align.vertical.top
+alpha
+aqi.medium
+arrow.up.left.and.arrow.down.right
+b
+bandage
+blue
+camera.aperture
+circle.dashed.inset.filled
+circle.dotted
+circle.filled.pattern.diagonalline.rectangle
+circle.grid.3x3
+circle.lefthalf.filled
+circle.lefthalf.striped.horizontal
+circle.righthalf.filled
+cm
+crop
+distribute.horizontal.center
+distribute.horizontal.fill
+distribute.vertical.center
+distribute.vertical.fill
+drop
+drop.fill
+en_US_POSIX
+eyedropper
+g
+green
+hand.raised
+in
+lasso
+magnifyingglass
+minus.circle.fill
+mm
+paintbrush.pointed
+paintpalette
+plus.circle.fill
+plusminus.circle
+point.topleft.down.to.point.bottomright.curvepath
+r
+rainbow
+rectangle.dashed
+red
+scale.3d
+seal
+slider.horizontal.3
+square.bottomhalf.filled
+square.on.circle
+sun.max
+textformat
+triangle.lefthalf.filled
+wand.and.stars
+wind

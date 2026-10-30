@@ -27,7 +27,7 @@ extension EditorSession {
     }
 
     var canMergeLayers: Bool { mergePlan() != nil }
-    var mergeTitle: String { mergePlan()?.action ?? "Merge Down" }
+    var mergeTitle: String { mergePlan()?.action.localized ?? "Merge Down".localized }
 
     /// ⌘E: the layers composited as the canvas shows them — blend modes, opacity, masks, clipping and adjustments
     /// baked in — into one pixel layer, trimmed to what is there, in their place, as one undo step.
@@ -72,7 +72,7 @@ extension EditorSession {
         next.insert(merged, at: min(max(0, insertion), next.count))
         guard (try? LayerHierarchy.validate(next.map(\.hierarchyRecord))) != nil else { NSSound.beep(); return }
         finishOpacityEdit()
-        beginEdit(plan.action)
+        beginEdit(plan.action.localized)
         self.document?.layers = next
         activeLayerID = merged.id
         endEdit()

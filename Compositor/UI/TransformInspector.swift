@@ -40,7 +40,7 @@ struct TransformInspector: View {
                 Picker("Sampling", selection: Binding(get: { value.sampling }, set: { sampling in
                     change { $0.sampling = sampling }
                 })) {
-                    ForEach(LayerSampling.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                    ForEach(LayerSampling.allCases, id: \.self) { Text($0.rawValue.localized).tag($0) }
                 }.frame(width: 170)
                 Button { change { $0.flipX.toggle() } } label: {
                     Image(systemName: "arrow.left.and.right.righttriangle.left.righttriangle.right")
@@ -133,12 +133,12 @@ struct TransformValueField: View {
     @FocusState private var focused: Bool
     var body: some View {
         HStack(spacing: 4) {
-            Text(label).font(.caption).foregroundStyle(.secondary)
+            Text(label.localized).font(.caption).foregroundStyle(.secondary)
                 .scrubbable(sensitivity: 1, value: Binding(get: { value }, set: { newValue in
                     change(newValue)
                     text = Self.formatted(Double(newValue))
                 }), range: range, step: 1, onEnd: finish)
-            TextField(label, text: $text)
+            TextField(label.localized, text: $text)
                 .textFieldStyle(.roundedBorder).focused($focused)
                 .frame(width: fieldWidth)
                 .accessibilityIdentifier("transform\(label)")
@@ -189,10 +189,12 @@ private struct AlignButton: View {
     private func row(_ alignments: [LayerAlignment], _ distributions: [LayerDistribution]) -> some View {
         HStack(spacing: 2) {
             ForEach(alignments, id: \.self) { alignment in
-                icon(alignment.symbol, "Align " + alignment.rawValue) { session.alignLayers(alignment) }
+                // The raw values name the edges and are already in the table; joining them here rather than
+                // with + keeps the whole phrase a single lookup key.
+                icon(alignment.symbol, String(format: "Align %@".localized, alignment.rawValue.localized)) { session.alignLayers(alignment) }
             }
             ForEach(distributions, id: \.self) { distribution in
-                icon(distribution.symbol, "Distribute " + distribution.rawValue + " (three or more layers)") {
+                icon(distribution.symbol, String(format: "Distribute %@ (three or more layers)".localized, distribution.rawValue.localized)) {
                     session.distributeLayers(distribution)
                 }
                 .disabled(!session.canDistributeLayers)
@@ -204,6 +206,6 @@ private struct AlignButton: View {
         Button(action: action) {
             Image(systemName: symbol).font(.system(size: 15)).frame(width: 30, height: 28).contentShape(Rectangle())
         }
-        .buttonStyle(.borderless).help(title).accessibilityLabel(title)
+        .buttonStyle(.borderless).help(title.localized).accessibilityLabel(title.localized)
     }
 }
