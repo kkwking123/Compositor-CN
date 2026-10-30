@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Compositor-CN</string>
+	<string>Compositor CN</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

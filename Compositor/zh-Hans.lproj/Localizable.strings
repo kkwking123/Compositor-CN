@@ -1197,3 +1197,82 @@
 "Underlying pixels · alpha-weighted histogram" = "下方像素 · 按 Alpha 加权的直方图";
 "CMYK Proof Colors" = "CMYK 校样颜色";
 "Untitled %@" = "未标题 %@";
+
+/* 本轮补录：错误弹窗文案、画笔拒绝起笔的原因、拾色器标题、新建画布提示、默认图层与文件夹名。
+   这些都走 String 通道（LocalizedError / NSAlert / 面板标题），SwiftUI 不会自动查表，代码里已补 .localized。 */
+
+/* 滤镜与选择的错误提示 */
+"Not enough unselected, opaque image pixels to synthesize a fill. Use a smaller selection with some surrounding image." = "没有足够的未选中、不透明像素来合成填充。请缩小选区，保留一部分周围图像。";
+"No content remained after trimming." = "裁剪后没有剩余内容。";
+"The trimmed image dimensions are invalid." = "裁剪后的图像尺寸无效。";
+"That selection is too detailed to outline. Try a different Tolerance, or turn on Contiguous." = "该选区过于复杂，无法描边。请换个容差试试，或启用连续。";
+"There isn’t enough memory to make that selection." = "内存不足，无法创建该选区。";
+"Object Selection requires macOS 14 or later." = "对象选择需要 macOS 14 或更高版本。";
+"The object mask could not be rendered." = "无法渲染对象蒙版。";
+"No foreground subject was detected in this layer. Try an image with a more distinct subject." = "此图层中未检测到前景主体。请换用主体更明显的图像。";
+"That profile isn’t a CMYK output profile." = "该描述文件不是 CMYK 输出描述文件。";
+"The selected animation timeline is missing or invalid." = "所选动画时间轴缺失或无效。";
+"The canvas could not be rendered. Try a smaller canvas." = "无法渲染画布。请尝试更小的画布。";
+"The image could not be encoded." = "无法编码该图像。";
+"The image could not be read. It may be damaged or unavailable." = "无法读取该图像，可能已损坏或不可用。";
+"Choose a JPEG, PNG, GIF, HEIC, HEIF, TIFF, WebP, PDF, or Photoshop (PSD) file." = "请选择 JPEG、PNG、GIF、HEIC、HEIF、TIFF、WebP、PDF 或 Photoshop (PSD) 文件。";
+"This PDF is password-protected. Save an unlocked copy, then import that." = "此 PDF 受密码保护。请先另存一份未加密的副本，再导入该副本。";
+"This is not a valid Compositor project, or its metadata is damaged." = "这不是有效的 Compositor 项目，或其元数据已损坏。";
+"An image inside the project is missing or damaged. The current document has not been replaced." = "项目内的图像缺失或损坏。当前文档未被替换。";
+"An image could not be saved. The previous project has not been replaced." = "无法保存图像。之前的项目未被替换。";
+"The Photoshop file could not be read. It may be damaged or incomplete." = "无法读取该 Photoshop 文件，可能已损坏或不完整。";
+"This Photoshop file uses a format version Compositor can’t read." = "此 Photoshop 文件使用了 Compositor 无法读取的格式版本。";
+"Only 8-bit RGB and CMYK Photoshop files can be imported." = "仅可导入 8 位 RGB 和 CMYK 的 Photoshop 文件。";
+"This Photoshop file uses a layer compression method that isn’t supported." = "此 Photoshop 文件使用了不受支持的图层压缩方式。";
+
+/* 尺寸与数量上限的提示（带参数） */
+"Animation export supports up to %1$@ frames, %2$@ megapixels across all exported frames, and 512 MiB of encoded data. Reduce the export size or frame count." = "动画导出最多支持 %1$@ 帧、所有导出帧合计 %2$@ 百万像素、512 MiB 编码数据。请减小导出尺寸或帧数。";
+"Image export supports canvases up to %1$@ megapixels and %2$@ pixels per side." = "图像导出支持最大 %1$@ 百万像素、每边不超过 %2$@ 像素的画布。";
+"This import exceeds the current %1$@-megapixel document budget or %2$@-pixel side limit." = "此导入超出了当前 %1$@ 百万像素的文档总量限制，或每边 %2$@ 像素的边长限制。";
+"This animation has more than %1$@ frames, which exceeds the current timeline limit." = "此动画超过 %1$@ 帧，超出了当前的时间轴限制。";
+"This project uses format version %1$@. This app supports versions 1–%2$@ and 27." = "此项目使用格式版本 %1$@。本应用支持版本 1–%2$@ 和 27。";
+"This project exceeds the supported canvas, layer, file-size, or %1$@-megapixel document limit." = "此项目超出了支持的画布、图层、文件大小或 %1$@ 百万像素文档限制。";
+"The font “%@” isn’t installed, so the text was drawn with the system font." = "未安装字体“%@”，文字已改用系统字体绘制。";
+
+/* 画笔无法起笔的原因 */
+"Several layers are selected. Select just one to paint on it." = "已选中多个图层。请只选择一个再进行绘制。";
+"“%@” is a folder, which has no pixels of its own. Paint on a layer inside it, or on the folder’s mask." = "“%@”是文件夹，本身没有像素。请在它内部的图层上绘制，或在文件夹的蒙版上绘制。";
+"“%@” is hidden, or inside a hidden folder. Show it to paint on it." = "“%@”已隐藏，或位于隐藏的文件夹内。请显示后再绘制。";
+"The layer mask is turned off. Shift-click its thumbnail to turn it on, then paint." = "图层蒙版已关闭。Shift 单击其缩览图打开它，然后再绘制。";
+"“%@” is an adjustment layer, with no pixels to paint. Paint on its mask instead." = "“%@”是调整图层，没有可绘制的像素。请改为在它的蒙版上绘制。";
+"Nothing is selected, so there’s nowhere to paint. Choose Select › Deselect (⌘D) to paint anywhere." = "当前没有选区，无处可绘制。请选择“选择 › 取消选择”(⌘D) 以便在任意位置绘制。";
+"Option-click where Clone Stamp should copy from first." = "请先 Option 单击指定仿制图章要复制的位置。";
+"Smudge and Liquify work on a layer's pixels, not its mask." = "涂抹与液化作用于图层像素，而非蒙版。";
+
+/* 拾色器的面板标题 */
+"Color Picker (Text Color)" = "拾色器（文字颜色）";
+"Color Picker (%1$@ Color)" = "拾色器（%1$@ 颜色）";
+"Color Picker (Background Color)" = "拾色器（背景色）";
+"Color Picker (Foreground Color)" = "拾色器（前景色）";
+"Color Picker (Gradient Map Highlights)" = "拾色器（渐变映射高光）";
+"Color Picker (Gradient Map Shadows)" = "拾色器（渐变映射阴影）";
+"Color Picker (Vignette Color)" = "拾色器（晕影颜色）";
+"Color Picker (Light %1$@)" = "拾色器（光源 %1$@）";
+"Color Picker (Light Color)" = "拾色器（光源颜色）";
+"Color Picker (Dark Color)" = "拾色器（暗色）";
+"Color Picker (%1$@)" = "拾色器（%1$@）";
+
+/* 新建画布与默认图层名 */
+"Resolution: 72 for screens, 300 for print. Click to switch." = "分辨率：屏幕用 72，印刷用 300。点按可切换。";
+" · %1$@ DPI: %2$@ × %3$@ pixels" = " · %1$@ DPI：%2$@ × %3$@ 像素";
+"Layer %@" = "图层 %@";
+"Folder %@" = "文件夹 %@";
+"Earliest response. Hue, saturation, and shadow tint move about half as far as Version 6." = "最早期的表现。色相、饱和度与暗部色动的幅度约为版本 6 的一半。";
+"Firmer color than Version 2. Primary shifts stay gentler than the current process." = "比版本 2 色彩更浓。颜色偏移仍比当前处理温和。";
+"Close to the current process, with slightly softer primary and shadow shifts." = "接近当前处理，颜色与暗部偏移略微柔和。";
+"Current default. The calibration sliders below apply at full strength." = "当前默认值。下方校准滑块以全部强度作用。";
+"Camera Raw" = "Camera Raw";
+
+/* 画布预设里的型号与分辨率名：中文版同样保留原样，仅为查表有落点。 */
+"4K" = "4K";
+"1440p" = "1440p";
+"1080p" = "1080p";
+"iPhone 18 Pro" = "iPhone 18 Pro";
+"iPhone 18 Pro Max" = "iPhone 18 Pro Max";
+"MacBook Pro 14\"" = "MacBook Pro 14\"";
+"MacBook Pro 16\"" = "MacBook Pro 16\"";

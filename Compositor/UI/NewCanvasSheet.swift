@@ -112,7 +112,9 @@ struct NewCanvasSheet: View {
                             Text("Custom").tag(CanvasPreset?.none)
                             ForEach(CanvasPreset.groups.indices, id: \.self) { group in
                                 Divider()
-                                ForEach(CanvasPreset.groups[group]) { Text($0.title).tag(CanvasPreset?.some($0)) }
+                                // title doubles as the preset's id, so it stays English in the model and is
+                                // looked up here, at the only place it reaches the screen.
+                                ForEach(CanvasPreset.groups[group]) { Text($0.title.localized).tag(CanvasPreset?.some($0)) }
                             }
                         }
                         .pickerStyle(.inline).labelsHidden()
