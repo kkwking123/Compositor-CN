@@ -1,0 +1,32 @@
+#!/bin/sh
+# Runs as root, once the payload is in place.
+#
+# An app downloaded from the Releases page carries the com.apple.quarantine attribute, and the installer copies
+# it onto the bundle it writes to /Applications. That attribute is the whole reason Gatekeeper intervenes on the
+# first launch of an ad-hoc signed app, and only root can clear it there — which is what this script runs as.
+# A notarized build does not need this, and does not mind it either.
+#
+# The installer passes the package path as $1 and the chosen volume as $2. APP_NAME is filled in by
+# scripts/make-pkg.sh, so the bundle name lives in one place.
+
+set -u
+
+APP_NAME="__APP_NAME__"
+
+# The volume the payload went onto, or "/" when the package is opened some other way. Only that copy is touched:
+# falling back to the boot volume would let an install to a second disk rewrite an app on the first.
+APP="${2:-/}/Applications/$APP_NAME"
+
+if [ ! -d "$APP" ]; then
+  echo "postinstall: no $APP, nothing to clear."
+  exit 0
+fi
+
+# provenance is the attribute Sequoia and later keep for apps that arrived from elsewhere; clearing quarantine
+# alone would leave the app blocked there. Both need root, which is what the package asks for (auth="root").
+for attr in com.apple.quarantine com.apple.provenance; do
+  /usr/bin/xattr -r -d "$attr" "$APP" 2>/dev/null || echo "postinstall: $attr was not cleared."
+done
+
+echo "postinstall: cleared the download attributes on $APP."
+exit 0

@@ -36,7 +36,7 @@ body:
     attributes:
       label: 从哪来的
       description: 从 Releases 下载的安装包，还是自己用 Xcode 编译的
-      placeholder: Releases 下载的 DMG
+      placeholder: Releases 下载的 PKG
     validations:
       required: true
   - type: textarea

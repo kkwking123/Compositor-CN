@@ -1,7 +1,7 @@
 #!/bin/zsh
-# Builds a signed, notarized DMG that opens without warnings on any Mac — the path for when a Developer ID
-# certificate is available. Without one, use scripts/release-local.sh: it packages an ad-hoc signed DMG instead,
-# which opens after a right-click > Open on first launch.
+# Builds a signed, notarized DMG and PKG that open without warnings on any Mac — the path for when a Developer ID
+# certificate is available. Without one, use scripts/release-local.sh: it packages the same two files ad-hoc
+# signed, which on another Mac take a right-click > Open on the DMG's app, or an install from the PKG.
 #
 # Needs, all kept out of this repository:
 #   - a "Developer ID Application" certificate in the login keychain
@@ -89,6 +89,17 @@ echo "==> Signing and notarizing the DMG"
 codesign --sign "$IDENTITY" --timestamp "$DMG"
 xcrun notarytool submit "$DMG" --keychain-profile "$NOTARY_PROFILE" --wait
 xcrun stapler staple "$DMG"
+
+echo "==> Building and notarizing the PKG"
+# Notarization alone would let Gatekeeper vouch for the app, but the download attribute still gets copied by the
+# browser, so the package carries the same postinstall the ad-hoc build uses. It has nothing to complain about
+# here, and it keeps an app installed from an older build clean.
+PKG="$DIST/$APP-$VERSION.pkg"
+rm -f "$PKG"
+"$PROJECT_DIR/scripts/make-pkg.sh" "$APP_PATH" "$APP" "$VERSION" "$PKG"
+codesign --sign "$IDENTITY" --timestamp "$PKG"
+xcrun notarytool submit "$PKG" --keychain-profile "$NOTARY_PROFILE" --wait
+xcrun stapler staple "$PKG"
 
 echo "==> What Gatekeeper will say on another Mac"
 spctl --assess --type open --context context:primary-signature --verbose=2 "$DMG"

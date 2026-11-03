@@ -14,7 +14,8 @@ Compositor 是一款用于合成与照片后期的 macOS 图像编辑器，用 S
 | 应用名称 | Compositor | Compositor-CN，与官方版同时安装时能分辨 |
 | Bundle ID | `com.wonderassembly.compositor` | `com.kkwking.compositor.cn`（可与官方版同时安装） |
 | 自动更新 | Sparkle，从上游 appcast 更新 | 已关闭，从本仓库 Releases 下载新版本 |
-| 代码签名 | Developer ID，已公证 | ad-hoc 签名（未公证），首次打开需右键「打开」 |
+| 代码签名 | Developer ID，已公证 | ad-hoc 签名（未公证） |
+| 安装包 | DMG | PKG 与 DMG 两种，见下 |
 
 自动更新被关闭是有原因的：上游的 appcast 用作者自己的 EdDSA 密钥签名，一旦跟着上游更新，装上的会是被替换回英文版的官方包；而 ad-hoc 签名的 App 也无法通过 Sparkle 的自校验来安装更新。
 
@@ -22,9 +23,15 @@ Compositor 是一款用于合成与照片后期的 macOS 图像编辑器，用 S
 
 ## 安装
 
-从 [Releases](https://github.com/kkwking123/Compositor-CN/releases/latest) 下载 `Compositor-CN-<版本>.dmg`，拖进「应用程序」。
+从 [Releases](https://github.com/kkwking123/Compositor-CN/releases/latest) 下载 `Compositor-CN-<版本>.pkg`，双击装进「应用程序」。装完直接双击图标就能打开。
 
-因为安装包没有 Apple 公证，首次启动要在图标上**右键 →「打开」**，在系统对话框里再点「打开」一次；之后双击即可正常启动。
+PKG 里的安装脚本会以 root 身份清掉 App 上的 `com.apple.quarantine`（以及新系统上的 `com.apple.provenance`）属性。没有这两个属性，Gatekeeper 就不会拦下未公证的 App——不装 PKG 的话，其他电脑首次打开要在图标上**右键 →「打开」**，在系统对话框里再点一次「打开」，也可以自己在终端执行：
+
+```sh
+xattr -dr com.apple.quarantine "/Applications/Compositor CN.app"
+```
+
+想自己拖进「应用程序」的，下载 `Compositor-CN-<版本>.dmg`，只是首次启动要多一次右键「打开」（或上面那条命令）。PKG 和 DMG 里的 App 完全一样，包本身同样没有公证，所以从浏览器下载后第一次打开 PKG 也需要右键「打开」一次。
 
 系统要求：
 
@@ -91,13 +98,13 @@ git merge upstream/main
 ## 发布
 
 ```sh
-./scripts/release-local.sh          # 编译 Release 并打成 dist/Compositor-CN-<版本>.dmg（ad-hoc 签名）
-REVISION=1 ./scripts/publish.sh     # 上传到 GitHub Releases，tag 为 v<版本>-cn.1
+./scripts/release-local.sh          # 编译 Release，打成 dist/Compositor-CN-<版本>.pkg 与同名的 .dmg（ad-hoc 签名）
+REVISION=1 ./scripts/publish.sh     # 两个包一起上传到 GitHub Releases，tag 为 v<版本>-cn.1
 ```
 
-`release-local.sh` 只需要 Xcode，不需要开发者账号，也不需要 `create-dmg`。日后拿到 Developer ID 证书，改用 `TEAM=<团队 ID> ./scripts/release.sh` 走签名加公证，再执行 `publish.sh`。
+`release-local.sh` 只需要 Xcode，不需要开发者账号，也不需要 `create-dmg`。包内的 `scripts/pkg/postinstall` 是 PKG 能直接打开的关键，它只改安装到的那个盘上的 App，不回去动启动盘上的副本。只想出 PKG 的话，拿一个已经编好的 `.app` 直接跑 `./scripts/make-pkg.sh <app> <文件名> <版本> <输出.pkg>`。日后拿到 Developer ID 证书，改用 `TEAM=<团队 ID> ./scripts/release.sh` 走签名加公证（那条路下两个包都会被公证），再执行 `publish.sh`。
 
-`publish.sh` 需要 `gh` 命令行工具（`brew install gh`）。没装也能发：跑完 `release-local.sh`，在仓库的 Releases → Draft a new release 里手动填 tag `v<版本>-cn.<修订号>`，把 `dist/` 里的 DMG 拖上去即可，效果相同。版本号沿用上游的 `MARKETING_VERSION`，本分支的修订号由 `REVISION` 区分，发布记录写进 [CHANGELOG.md](CHANGELOG.md)。
+`publish.sh` 需要 `gh` 命令行工具（`brew install gh`）。没装也能发：跑完 `release-local.sh`，在仓库的 Releases → Draft a new release 里手动填 tag `v<版本>-cn.<修订号>`，把 `dist/` 里的 PKG 和 DMG 拖上去即可，效果相同。版本号沿用上游的 `MARKETING_VERSION`，本分支的修订号由 `REVISION` 区分，发布记录写进 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 给 AI 代理的说明
 

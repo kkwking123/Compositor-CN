@@ -2,6 +2,18 @@
 
 本分支的版本号形如 `<上游版本>-cn.<修订号>`，例如 `1.5.12-cn.1` 表示基于上游 v1.5.12 的第一个中文修订。上游的功能变化记在上游的 Release 里，这里只记中文分支自己的改动。
 
+## [Unreleased]
+
+### 新增
+
+- `scripts/make-pkg.sh`：把编好的 `.app` 封成 PKG 安装包，装到「应用程序」
+- `scripts/pkg/postinstall`：安装时以 root 身份清掉 App 上的 `com.apple.quarantine`（以及新系统的 `com.apple.provenance`），其他电脑装完双击就能打开，不必再右键「打开」或手动跑 `xattr`
+- `release-local.sh` 与 `release.sh` 在 DMG 之外同时产出 PKG，`publish.sh` 把两个包一起发到 Releases
+
+### 变更
+
+- README 的安装说明改为推荐 PKG，DMG 作为手动拖拽的另一种选择保留
+
 ## [1.5.12-cn.1] - 2026-10-30
 
 基于上游 [v1.5.12](https://github.com/robbietilton/Compositor/releases/tag/v1.5.12)。
